@@ -71,3 +71,4 @@ a = Analyzer(token_filters=token_filters)
 for token in a.analyze(text):
     print(token)
     
+print("test github")
