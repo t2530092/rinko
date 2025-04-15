@@ -1,5 +1,4 @@
-#20250410
-#4-2-1
+#20250410 4-2-1
 print("print html")
 html = """ 
 <html>
@@ -71,4 +70,20 @@ a = Analyzer(token_filters=token_filters)
 for token in a.analyze(text):
     print(token)
     
-print("test github")
+#辞書定義　PAGE 68
+#自分定義の辞書を使って、文章を形態素解析を行う
+my_tokenizer = Tokenizer(udic="userdic.csv", udic_enc="utf-8")
+for token in my_tokenizer.tokenize(text):
+    print(token)
+
+#4-2 3-1
+#単語正規化
+#正規化とは？単語の文字種を統一、単語を置き換える処理をする　(同じ種の文字処理しやすい)
+#PYTHONで小文字の処理を行う(英語) 
+text_p70_1 = "President Obama is speaking at the White House"
+print(text_p70_1.lower())
+print(text_p70_1.upper())
+print(text_p70_1.title())
+
+#4-2 3-2
+#数字置き換え
