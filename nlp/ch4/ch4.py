@@ -87,3 +87,52 @@ print(text_p70_1.title())
 
 #4-2 3-2
 #数字置き換え
+import re
+def normalize_number(text):
+    replaced_text = re.sub(r'\d+', '0', text)
+    return replaced_text
+text = "2万0689.24ドル"
+print(normalize_number(text))
+
+def normalize_number_page71(text):
+    replaced_text = re.sub(r'\d', '0', text)
+    return replaced_text
+
+print(normalize_number_page71(text))
+
+#4-2 4-1
+with open ("Japanese.txt", "r", encoding="utf-8") as f:
+    stopwords = [w.strip() for w in f]
+    stopwords = set(stopwords)
+
+def remove_stopwords(words, stopwords):
+    words = [w for w in words if w not in stopwords]
+    return words
+t3 = Tokenizer(wakati=True)
+text = "りんごをいくつか買う"
+words_p73 = t3.tokenize(text)
+words_lsit_p73 = []
+for word in words_p73:
+    words_lsit_p73.append(word)
+print(words_lsit_p73)
+
+lsit_page73 = remove_stopwords(words_lsit_p73, stopwords)
+print(lsit_page73)
+
+#4-2 4-2出現頻度による方式
+with open ("ja.text8", "r", encoding="utf-8") as f:
+    text_p75 = f.read()
+    words_p75 = text_p75.split()
+
+from collections import Counter
+print(Counter(["cat", "dog", "cat"]))
+
+fdist = Counter(words_p75)
+print(fdist.most_common(n=10))
+
+#4-2-5 単語のID化
+UNK = "<UNK>"
+PAD = "<PAD>"
+vocab = {PAD:0,UNK:1}
+for word, _ in fdist.most_common():
+    vocab[word] = len(vocab)
