@@ -146,3 +146,17 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 sequences = [[1, 2],
              [3, 4, 5],
              [6, 7, 8, 9]]
+print(pad_sequences(sequences))
+
+print(pad_sequences(sequences, padding="post"))
+
+print(pad_sequences(sequences, maxlen=3))
+
+print(pad_sequences(sequences, maxlen=3, truncating="post"))
+
+print(pad_sequences(sequences, value=10))
+
+#4-3-1
+
+
+
