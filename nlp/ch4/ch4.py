@@ -155,8 +155,3 @@ print(pad_sequences(sequences, maxlen=3))
 print(pad_sequences(sequences, maxlen=3, truncating="post"))
 
 print(pad_sequences(sequences, value=10))
-
-#4-3-1
-
-
-
