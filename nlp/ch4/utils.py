@@ -20,6 +20,12 @@ import pandas as pd
 
 from datasets import load_dataset
 
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+
+
+
 def filter_by_ascii_rate(text, threshold=0.9):
     ascii_letters = set(string.printable)
     rate = sum( c in ascii_letters for c in text ) / len(text)
@@ -41,32 +47,17 @@ def filter_by_ascii_rate(text, threshold=0.9):
     rate = sum(c in ascii_letters for c in text) / len(text)
     return rate <= threshold
 
-import re
-from bs4 import BeautifulSoup
-from janome.tokenizer import Tokenizer
-
-t = Tokenizer()
-def clean_html(html, strip=False):
-    soup = BeautifulSoup(html, "html.parser")
-    text = soup.get_text(strip=strip)
-    return text
-
-def tokenize(text):
-    tokens = [token.base_form for token in t.tokenize(text)]
-    return tokens
-
-def normalize_number(text, reduce=False):
-    if reduce:
-        normalized_text = re.sub(r'\d+', '0', text)
-    else:
-        normalized_text = re.sub(r'\d', '0', text)
-    return normalized_text
-
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score
-
-def train_and_eval(x_train, y_train, x_test, y_test, lowercase=False,\
+def train_and_eval(x_train, y_train, x_test, y_test, lowercase=False,
                    tokenize=None, preprocessor=None):
-    return
-
+    
+    vectorizer = CountVectorizer(lowercase=lowercase,
+                                 tokenizer=tokenize,
+                                 preprocessor=preprocessor)
+    
+    x_train_vec = vectorizer.fit_transform(x_train)
+    x_test_vec = vectorizer.transform(x_test)
+    clf = LogisticRegression(solver="liblinear", n_jobs=-1)
+    clf.fit(x_train_vec, y_train)
+    y_pred = clf.predict(x_test_vec)
+    score = accuracy_score(y_test, y_pred)
+    print("{:.4f}".format(score))
