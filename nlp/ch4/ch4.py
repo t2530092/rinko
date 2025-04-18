@@ -133,6 +133,16 @@ print(fdist.most_common(n=10))
 #4-2-5 単語のID化
 UNK = "<UNK>"
 PAD = "<PAD>"
-vocab = {PAD:0,UNK:1}
+vocab = {PAD:0, UNK:1}
 for word, _ in fdist.most_common():
     vocab[word] = len(vocab)
+
+words_p76 = ["私", "は", "元気"]
+word_ids_p76 = [vocab.get(w, vocab[UNK]) for w in words_p76]
+print(word_ids_p76)
+
+#4-2-6 パディング
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+sequences = [[1, 2],
+             [3, 4, 5],
+             [6, 7, 8, 9]]
