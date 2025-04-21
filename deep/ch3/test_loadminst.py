@@ -68,6 +68,7 @@ print("Accuracy:" + str(float(accuracy_cnt) / len(x)))
 #print(label)
 #img = img.reshape(28, 28)
 #img_show(img)
+#test git
 
 
 
