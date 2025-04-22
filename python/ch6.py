@@ -1,3 +1,5 @@
+import random
+
 print("====================print 6.1====================")
 alien_0 = {"color":"green", "points":5}
 print(alien_0["color"])
@@ -244,6 +246,7 @@ favorite_languages = {
     'Edward': 'rust',
     'Phil': 'python',
 }
+
 name_list = [
     "Jen",
     "Sarah",
@@ -262,3 +265,161 @@ for name in name_list:
         print(f"thank you {name}")
     else:
         print(f"{name} :(")
+
+#6.4 嵌套
+#6.4.1 字典列表
+print("====================print 6.4.1====================")
+alien_0 = {'color': 'green', 'points': 5}
+alien_1 = {'color': 'yellow', 'points': 10}
+alien_2 = {'color': 'red', 'points': 15}
+
+aliens = [alien_0, alien_1, alien_2]
+for alien in aliens:
+    print(alien)
+
+aliens = []
+#创建30个外星人 
+for alien_number in range(30):
+    new_alien = {'color': 'green', 'points': 5, 'speed': 'slow'}
+    aliens.append(new_alien)
+
+for alien in aliens[:5]:
+    print(alien)
+print("...")
+
+print(f"Total number of aliens:{len(aliens)}")
+
+for alien in aliens[:3]:
+    if alien['color'] == "green":
+        alien['color'] = 'yellow'
+        alien['speed'] = 'medium'
+        alien['points'] = 10
+    elif alien["color"] == "yellow":
+        alien["color"] = "red"
+        alien["speed"] = "fast"
+        alien["points"] = 15
+
+for alien in aliens[:5]:
+    print(alien)
+print("...")
+
+#6.4.2 在字典中存储列表
+#存储顾客所点比萨的信息
+print("====================print 6.4.2====================")
+pizza = {
+    'crust': 'thick',
+    'toppings': ['mushrooms', 'extra cheese'],
+}
+
+#概述顾客点的比萨
+print(f"You ordered a {pizza['crust']}-crust pizza "
+      "with the following toppings:")
+for topping in pizza['toppings']:
+    print(f"\t{topping}")
+
+favorite_languages = {
+    'jen': ['python', 'rust'],
+    'sarah': ['c'],
+    'edward': ['rust', 'go'],
+    'phil': ['python', 'haskell'],
+}
+
+for name, languages in favorite_languages.items():
+    print(f"\n{name.title()}`s favorite languages are:")
+    for language in languages:
+        print(f"\t{language.title()}")
+
+#6.4.3 在字典中存储字典
+users = {
+    "aeinstein": {
+        'first': 'albert',
+        'last': 'einstein',
+        'location': 'princeton',
+    },
+    'mcurie': {
+        'first': 'marie',
+        'last': 'curie',
+        'location': 'paris',
+    },
+}
+
+for username, user_info in users.items():
+    print(f"\n Username: {username}")
+    full_name = f"{user_info["first"]} {user_info["last"]}"
+    location = user_info['location']
+
+    print(f"\tFull name: {full_name.title()}")
+    print(f"\tLocation: {location.title()}")
+
+#p6.7 练习 人们 
+print("====================print p6.7==================")
+
+people1 = {
+    "first_name":"Emily",
+    "last_name":"Carter",
+    "age":29,
+    "city":"Seattle"
+}
+
+people2 = {
+    "first_name":"Daniel",
+    "last_name":"Kim",
+    "age":35,
+    "city":"New York"
+}
+
+people3 = {
+    "first_name":"Aisha",
+    "last_name":"Hassan",
+    "age":42,
+    "city":"London"
+}
+
+peoples = [people1, people2, people3]
+
+random.shuffle(peoples)
+for people in peoples:
+    print(f"user name : {people["first_name"]} {people["last_name"]}")
+    print(f"age : {people["age"]}")
+    print(f"city : {people["city"]}")
+
+#p6.8 练习 宠物 
+print("====================print p6.8==================")
+pets = [
+    {
+        "pet_type":"Dog",
+        "Pet_owner":"Emily Carter",
+    },
+    {
+        "pet_type":"Cat",
+        "Pet_owner":"Daniel Kim",
+    },
+    {
+        "pet_type":"Parrot",
+        "Pet_owner":"Aisha Hassan",
+    },
+    {
+        "pet_type":"Rabbit",
+        "Pet_owner":"Lucas Brown",
+    },
+    {
+        "pet_type":"Hamster",
+        "Pet_owner":"Sofia Martinez",
+    },
+]
+
+random.shuffle(pets)
+for pet in pets:
+    print(f"pet type : {pet["pet_type"]}")
+    print(f"pet owner : {pet["Pet_owner"]}\n")
+
+#p6.9 喜欢的地方
+print("====================print p6.9==================")
+favorite_places = {
+    "Emily Carter":"Kyoto, Japan",
+    "Daniel Kim":"Grand Canyon, USA",
+    "Aisha Hassan":"Santorini, Greece",
+}
+
+for name, place in favorite_places.items():
+    print(f"{name}`s favorite place is {place}")
