@@ -2,6 +2,11 @@
 #質的変数の処理
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
+from sklearn.feature_extraction.text import CountVectorizer
+#形態素解析
+from janome.tokenizer import Tokenizer
+
+
 def test_chapter_5_2_1():
     df = pd.DataFrame(
         [
@@ -107,6 +112,40 @@ def test_chapter_5_2_2_2():
     print(df[["Fare", "FareInt"]].head())
 
 #5.3    テキストのベクトル表現
+#N-gram ベクトル
+#シーケンスベクトル
+
+#5.3.1.1    One-hot エンコーディング
+def test_chapter_5_3_1_1():
+    #one-hot エンコーディングの実装
+    vectorizer = CountVectorizer(binary=True)
+    docs = ["the cat is out of the bag", "dogs are"]
+    bow = vectorizer.fit_transform(docs)
+    print(bow.toarray())
+    print(vectorizer.vocabulary_)
+
+    #日本語を試す
+    vectorizer_jp = CountVectorizer(binary=True)
+    docs_jp = ["天気がいいから、散歩しましょう"]
+    bow_jp = vectorizer_jp.fit_transform(docs_jp)
+    print(bow_jp.toarray())#[[1 1]]
+    
+    #t = Tokenizer()
+    #docs_jp_list = t.tokenize(docs_jp)
+    #vectorizer_jp = CountVectorizer(binary=True)
+    #bow_jp = vectorizer_jp.fit_transform(docs_jp_list)
+    #print(bow_jp.toarray())
+    #print(vectorizer_jp.vocabulary_)
+
+def test_chapter_5_3_1_2():
+    #Count エンコーディング
+    vectorizer = CountVectorizer(binary=False)
+    docs = ["the cat is out of the bag", "dogs are"]
+    bow = vectorizer.fit_transform(docs)
+    print(bow.toarray())
+
+def test_chapter_5_3_1_2():
+    
 
 def main():
     index_str = input("input index:")
