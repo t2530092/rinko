@@ -3,6 +3,7 @@
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import TfidfVectorizer
 #形態素解析
 from janome.tokenizer import Tokenizer
 
@@ -144,8 +145,27 @@ def test_chapter_5_3_1_2():
     bow = vectorizer.fit_transform(docs)
     print(bow.toarray())
 
-def test_chapter_5_3_1_2():
-    
+    vectorizer = TfidfVectorizer()
+    docs = ["the cat is out of the bag", "the dogs are"]
+    tfidf = vectorizer.fit_transform(docs)
+
+    vocab = vectorizer.get_feature_names_out()
+    print(pd.DataFrame(tfidf.toarray(), columns=vocab).round(2))
+
+def test_chapter_5_3_1_3():
+    t = Tokenizer(wakati=True)
+    vectorizer = CountVectorizer(tokenizer=t.tokenize)
+    docs = ["猫の子子猫","獅子の子子獅子"]
+    bow = vectorizer.fit_transform(docs)
+    vocab = vectorizer.get_feature_names_out()
+    print(pd.DataFrame(bow.toarray(), columns=vocab))
+
+def test_chapter_5_3_1_4():
+    vectorizer = CountVectorizer(ngram_range=(2, 2))
+    docs = ["the cat is out of the bag", "dog are"]
+    bow = vectorizer.fit_transform(docs)
+    print(vectorizer.vocabulary_)
+#ch 5-4
 
 def main():
     index_str = input("input index:")
