@@ -2,22 +2,33 @@ from sklearn.feature_extraction.text import CountVectorizer,TfidfVectorizer
 from sklearn.model_selection import train_test_split
 
 #from preprocessing import  tokenize
-from utils import train_and_eval
-
-from datasets import load_dataset
+from ch5_utils import train_and_eval
+from ch5_utils import load_data
 import random
 def main():
-    dataset = load_dataset("SetFit/amazon_reviews_multi_ja")
-    dataset.set_format(type="pandas")
-    df = dataset["train"][:]
-    df = df.sample(frac=1, random_state=6)
-    df = df.head(n=5000)
+    
+    df = load_data()
     x = df["text"]
     y = df["label"]
     print("len of x is")
     print(len(x))
     print("len of y is")
     print(len(y))
+    
+    index = 0
+    for textx in x:
+        print(textx)
+        index = index + 1
+        if index > 10:
+            break
+    index = 0     
+    for texty in y:
+        print(texty)
+        index = index + 1
+        if index > 10:
+            break
+
+        
     #for indexy in y:
     #    print(indexy)
 
